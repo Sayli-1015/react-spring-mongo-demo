@@ -8,22 +8,22 @@ const Home = () => {
                 </div>
                 <h1 className="quality-content">Quality</h1>
             </div>
-            <div className="options-container">
-            <div className="left-options-container">
-                <p className="option-container-heading">SELECT</p>
+            <div className="card-container">
+            <div className="left-card-container">
+                <p className="card-container-heading">SELECT</p>
                 <div>
-                    <p className="option-container-buttons">MASTER DATA</p>
+                    <p className="card-container-buttons">MASTER DATA</p>
                 </div>
             </div>
 
-            <div className="left-options-container">
-                <p className="option-container-heading">ACT</p>
-                <div className="option-container-buttons">PART FAMILY MASTER</div>
-                <div className="option-container-buttons">BARCODE PATTERN MASTER</div>
+            <div className="left-card-container">
+                <p className="card-container-heading">ACT</p>
+                <div className="card-container-buttons">PART FAMILY MASTER</div>
+                <div className="card-container-buttons">BARCODE PATTERN MASTER</div>
             </div>
-            <div className="right-options-container">
-                <p className="option-container-heading">TOOLS</p>
-                <div className="option-container-buttons">MASTER DATA QUALITY</div>
+            <div className="right-card-container">
+                <p className="card-container-heading">TOOLS</p>
+                <div className="card-container-buttons">MASTER DATA QUALITY</div>
             </div>
             </div>
         </>
