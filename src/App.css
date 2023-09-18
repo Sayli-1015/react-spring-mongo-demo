@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+
 .container {
     position: fixed;
     width: 100%;
@@ -8,17 +11,58 @@
     display:flex;
     justify-content: space-between;
     align-items:center;
-    height: 4rem;
+    height: 52px;
+    width: 100%;
     background-color: #FFFFFF;
-    border-bottom: 2px solid #CEDCEE;
-    padding: 10px 20px;
+    border-bottom: 1px solid #e8eef6;
+    padding: 2px 30px 2px 30px;
     /*gap: 12rem;*/
 }
 
+.nav-left-container {
+    display:flex;
+    align-items: center;
+}
+
+.nav-right-container {
+    text-align: right;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon-container {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon-container svg {
+    margin-right: 12px;
+    cursor: pointer;
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.icon-disable {
+    color: #d6d6d6;
+}
+
+.down-key {
+    margin-right: 0;
+    color: #4a7fc1;
+}
 /* Navbar logo */
 .nav-logo {
     cursor: pointer;
-    width: 110px; /* Set the logo width */
+    /*width: 110px;*/
+    float: left;
+    height: 3.2rem;
+    padding-top: 2px;
+    border-right: 1px solid #e8eef6;
+    padding-right: 20px;
+    object-fit: cover;
+    object-position: left top;/* Set the logo width */
 }
 
 .nav-container ul {
@@ -28,6 +72,11 @@
     display: flex;
     align-items: center;
 }
+/*.iconButton {*/
+/*    height: 2em;*/
+/*    min-width: 2em;*/
+/*}*/
+
 
 /* Navbar menu list items */
 .nav-container ul li {
@@ -44,6 +93,16 @@
 /* Navbar side logo */
 .nav-side-logo {
     width: 100px; /* Set the side logo width */
+
+}
+
+
+
+.imps-container {
+    border-left: 1px solid #e8eef6;
+    padding: 4px 0px 4px 15px;
+    display: inline-block;
+    width: 100%;
 }
 
 footer {
@@ -58,8 +117,100 @@ footer {
     font-size: 0.8rem;
     font-family: Helvetica;
     color: #838EAB;
+}
 
+.quality-container {
+    display: flex;
+    height: 3rem;
+    /*border: 1px solid red;*/
+    padding: 10px;
+    margin: 20px 30px 15px 30px;
+    border-radius: 6px;
+    background: #C6CEDB 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+}
 
+.home-icon-container {
+    width: 30px;
+    height: 30px;
+    background: #608FC9 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    border-radius: 3px;
+    padding: 3px;
+}
+.home-icon {
+    width: 20px;
+    height: 17px;
+}
+
+.quality-content {
+    margin-left: 9px;
+    text-align: left;
+    font: normal normal bold 20px/27px Open Sans;
+    letter-spacing: 0px;
+    color: #4E4E4E;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.options-container {
+    display: flex;
+    justify-content: flex-start;
+    /*border: 1px solid green;*/
+    margin-left: 30px;
+    margin-right: 30px;
+    height: 27.5rem;
+}
+
+.left-options-container {
+    /*border: 1px solid red;*/
+    width: 16rem;
+    padding: 0 16px;
+    margin-right: 17px;
+    background: #DCE2EA 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 12px;
+    text-align: left;
+    font: normal normal bold 14px/22px Open Sans;
+    letter-spacing: 0px;
+    color: #4E4E4E;
+    text-transform: uppercase;
+    opacity: 1;
+    /*opacity: 0.5;*/
+}
+
+.right-options-container {
+    width: 16rem;
+    padding: 0 16px;
+    border-radius: 12px;
+    margin-left: auto;
+    background: #EAEFF7 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    /*border: 1px solid #608FC9;*/
+    text-align: left;
+    font: normal normal bold 14px/22px Open Sans;
+    letter-spacing: 0px;
+    color: #4E4E4E;
+    text-transform: uppercase;
+    opacity: 1;
+    /*opacity: 0.17;*/
+}
+
+.option-container-heading {
+    margin: 14px 0;
+}
+.option-container-buttons {
+    /*border: 1px solid green;*/
+    height: 3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 3px 3px #00000043;
+    border-radius: 8px;
+    /*opacity: 1;*/
 }
 
 footer a {

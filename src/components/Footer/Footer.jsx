@@ -1,8 +1,14 @@
+import styles from './Footer.module.css';
 
 const Footer = () => {
     return(
         <footer>
-            <p>Copyright 2021 <a>Tata Motors</a>. All right reserved</p>
+            <div className={styles.footer}>
+                <span className={styles.footerText}>
+                    © Copyright 2021 <span className={styles.companyName}> Tata Motors</span>. All rights
+                    reserved
+                </span>
+            </div>
         </footer>
     );
 }
