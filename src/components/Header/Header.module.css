@@ -43,6 +43,7 @@
     margin-right: 0;
     color: #4a7fc1;
 }
+
 /* Navbar logo */
 .navLogo {
     cursor: pointer;
@@ -56,32 +57,11 @@
     object-position: left top;/* Set the logo width */
 }
 
-.navContainer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.navContainer ul li {
-    margin-right: 20px; /* Spacing between menu items */
-}
-
-.navLine {
-    width: 1px;
-    height: 4rem;
-    background-color: #CEDCEE;
-    margin: 0 20px;
-}
-
 /* Navbar side logo */
 .navSideLogo {
     width: 100px; /* Set the side logo width */
 
 }
-
-
 
 .impsContainer {
     border-left: 1px solid #e8eef6;
