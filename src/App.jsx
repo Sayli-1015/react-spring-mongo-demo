@@ -4,11 +4,16 @@ import viteLogo from '/vite.svg'
 import React from "react";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import Quality from "./pages/Quality/Quality.jsx";
+import {Route, Routes} from 'react-router-dom';
 
 export const App = () => {
     return(
         <>
             <Header />
+            <Routes>
+                <Route path='/' element={<Quality />} />
+            </Routes>
             <Footer />
         </>
 

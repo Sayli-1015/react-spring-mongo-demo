@@ -1,6 +1,6 @@
 .footer {
     background: #e1e4e9;
-    color: #4e4e4e;
+    color: $font-color;
     width: 100%;
     font-size: 1vw;
     min-height: 4.5vh;
