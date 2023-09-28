@@ -6,6 +6,7 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Quality from "./pages/Quality/Quality.jsx";
 import {Route, Routes} from 'react-router-dom';
+import PFMaster from "./pages/PartFamilyMaster/PFMaster.jsx";
 
 export const App = () => {
     return(
@@ -13,6 +14,7 @@ export const App = () => {
             <Header />
             <Routes>
                 <Route path='/' element={<Quality />} />
+                <Route path='/PFMaster' element={<PFMaster />} />
             </Routes>
             <Footer />
         </>

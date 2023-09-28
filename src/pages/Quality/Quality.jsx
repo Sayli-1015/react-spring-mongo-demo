@@ -1,11 +1,13 @@
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import './Quality.css'
+import './Quality.css';
+
 
 import tool from '../../assets/Icon metro-tools.png'
 
 import React from "react";
 
 const Quality = () => {
+
     return(
         <>
             <div className="quality-container">

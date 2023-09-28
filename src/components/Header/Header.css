@@ -1,5 +1,5 @@
 .main-nav {
-    border-bottom: 1px solid $header-border;
+    //border-bottom: 1px solid #e8eef6;
     height: 52px;
     width: 100%;
     display: flex;
@@ -67,7 +67,7 @@
 }
 
 .imps-nav {
-    border-left: 1px solid $header-border;
+    border-left: 1px solid #e8eef6;
     padding: 4px 0 4px 15px;
     display: inline-block;
     width: 100%;

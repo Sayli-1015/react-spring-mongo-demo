@@ -101,7 +101,8 @@
 
           .card-buttons:hover{
 
-              background-color: #acd2e0;
+              background-color: #34b6ee;
+              color: white;
               cursor: pointer;
           }
 
