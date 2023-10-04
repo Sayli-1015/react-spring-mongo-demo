@@ -5,19 +5,20 @@ import {useEffect, useState} from "react";
 import Modal from "../AddPF/AddPF.jsx";
 import { Virtuoso } from 'react-virtuoso';
 import SuccessModal from "../SuccessModal/SuccessModal.jsx";
+import EditModal from "../EditPF/EditPF.jsx";
+import axios from "axios";
 
 
 
 
 const PFList = () => {
     const [showModal, setShowModal] = useState(false);
-
+    const [showEditModal, setShowEditModal] = useState(false);
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
-
-
-
-
+    const [selectedRows, setSelectedRows] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+    const [editedData, setEditedData] = useState(null);
 
     const openModal = () => {
         setShowModal(true);
@@ -31,6 +32,12 @@ const PFList = () => {
 
 
 
+    const closeEditModal = () => {
+        setShowEditModal(false);
+    };
+
+
+
 
 
     const handleAddData = (newData) => {
@@ -40,6 +47,32 @@ const PFList = () => {
 
 
 
+
+
+    const handleRowToggle = (row) => {
+        if (selectedRows.includes(row)) {
+            setSelectedRows(selectedRows.filter((selectedRow) => selectedRow !== row));
+        } else {
+            setSelectedRows([...selectedRows, row]);
+        }
+    };
+
+    const handleSelectAllToggle = () => {
+        setSelectAll(!selectAll);
+
+        if (!selectAll) {
+            setSelectedRows([...tableData]);
+        } else {
+            setSelectedRows([]);
+        }
+    };
+
+    const openEditModal = () => {
+        if (selectedRows.length === 1) {
+            setEditedData(selectedRows[0]);
+            setShowEditModal(true);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,6 +96,34 @@ const PFList = () => {
 
 
     }, []);
+
+    const handleEditUpdate =(updatedData) => {
+
+        console.log('Updating Data:', updatedData);
+
+        // Update the selected rows in the tableData array
+        setTableData((prevData) => {
+            return prevData.map((row) => {
+                if (selectedRows.includes(row)) {
+                    setSelectedRows([]);
+                    return updatedData;
+                }
+                return row;
+            });
+        });
+    };
+
+    const handleDelete = async () => {
+        try {
+            // Assuming your API endpoint supports batch deletion
+            await Promise.all(selectedRows.map(row => axios.delete(`http://localhost:8080/PFMaster/${selectedRows[0].uuid}`)));
+
+            fetchData();
+            setSelectedRows([]);
+        } catch (error) {
+            console.error('Error deleting data:', error);
+        }
+    };
 
 
 
@@ -97,6 +158,12 @@ const PFList = () => {
                                 // Header row
                                 return (
                                     <div className="header-row" key={index}>
+                                        <div className="serial">
+                                        <div>
+                                            <input type="checkbox" checked={selectAll} onChange={handleSelectAllToggle} />
+                                        </div>
+                                        <div>#</div>
+                                        </div>
                                         <div className="header-cell">Part Family Name</div>
                                         <div className="header-cell">Applicable Shop Types</div>
                                         <div className="header-cell">Criticality</div>
@@ -117,18 +184,22 @@ const PFList = () => {
                             const criticalities = item.criticality ? item.criticality.join(', ') : '';
                             return (
                                 <div className="table-row" key={index}>
+                                    <div className="table-cell">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedRows.includes(item)}
+                                            onChange={() => handleRowToggle(item)}
+
+                                        />
+
+                                    </div>
+                                    <div className="table-cell">{index}</div>
                                     <div className="table-cell">{item.partFamilyName}</div>
                                     <div className="table-cell">{shopTypes}</div>
                                     <div className="table-cell">{criticalities}</div>
                                     <div className="table-cell">{item.updatedBy}</div>
                                     <div className="table-cell">
-
-                                        {timeString}{' '}
-                                        {dateObject.toLocaleDateString('en-GB', {
-                                            day: '2-digit',
-                                            month: '2-digit',
-                                            year: 'numeric',
-                                        })}
+                                        {timeString} {dateObject.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                                     </div>
                                 </div>
                             );
@@ -139,8 +210,12 @@ const PFList = () => {
 
             <div className="functionButtons">
                 <button className="customiseButton">CUSTOMISE TABLE</button>
-                <button className="deleteButton">DELETE</button>
-                <button className="editButton">EDIT</button>
+                <button className="deleteButton" onClick={handleDelete}>DELETE</button>
+                <div className="edit">
+                    <button className="editButton" onClick={openEditModal}>EDIT</button>
+                    <EditModal showModal={showEditModal} closeModal={closeEditModal} data={editedData} onUpdate={handleEditUpdate}/>
+                </div>
+
                 <div className="add">
                     <button className="addButton" onClick={openModal}>ADD PART FAMILY</button>
                     <Modal showModal={showModal} closeModal={closeModal} onAdd={handleAddData} />

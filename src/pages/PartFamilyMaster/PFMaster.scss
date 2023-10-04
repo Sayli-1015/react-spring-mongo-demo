@@ -108,6 +108,10 @@ h1{
     display: flex;
 
     opacity: 1;
+    .serial{
+      display: flex;
+      flex: 1;
+    }
     .header-cell{
       flex: 1;
       padding: 8px;
@@ -126,7 +130,7 @@ h1{
 
   .table-cell {
     flex: 1;
-    padding: 8px;
+    padding: 6px;
     font: normal normal normal 13px/22px Open Sans;
     letter-spacing: 0px;
     color: #707070;
@@ -156,12 +160,14 @@ h1{
     @extend %buttonCustomization;
 
   }
-  .editButton{
-    background: #6AA98F 0% 0% no-repeat padding-box;
-    margin-left: 10px;
-    width: 3rem;
-    @extend %buttonCustomization;
-
+  .edit {
+    .editButton {
+      background: #6AA98F 0% 0% no-repeat padding-box;
+      margin-left: 10px;
+      width: 3rem;
+      height: 2rem;
+      @extend %buttonCustomization;
+    }
   }
   .add {
     margin-left: auto;
