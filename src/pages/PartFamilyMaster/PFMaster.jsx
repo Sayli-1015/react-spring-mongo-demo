@@ -20,6 +20,9 @@ const PFList = () => {
     const [selectAll, setSelectAll] = useState(false);
     const [editedData, setEditedData] = useState(null);
 
+    const isEditDisabled = selectedRows.length !== 1;
+    const isDeleteDisabled = selectedRows.length === 0;
+
     const openModal = () => {
         setShowModal(true);
     };
@@ -73,33 +76,26 @@ const PFList = () => {
             setShowEditModal(true);
         }
     };
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://localhost:8080/PFMaster');
+            const data = response.data;
+            setTableData(data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch('http://localhost:8080/PFMaster');
-                const data = await response.json();
-
-                setTableData(data);
-
-
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-            }
-        };
-
-        fetchData()
-
-
-
+        fetchData();
     }, []);
 
     const handleEditUpdate =(updatedData) => {
 
-        console.log('Updating Data:', updatedData);
+
 
         // Update the selected rows in the tableData array
         setTableData((prevData) => {
@@ -115,18 +111,20 @@ const PFList = () => {
 
     const handleDelete = async () => {
         try {
-            // Assuming your API endpoint supports batch deletion
-            await Promise.all(selectedRows.map(row => axios.delete(`http://localhost:8080/PFMaster/${selectedRows[0].uuid}`)));
+            for (const selectedRow of selectedRows) {
+                const rowId = selectedRow.uuid;
+                await axios.delete(`http://localhost:8080/PFMaster/${rowId}`);
+            }
 
-            fetchData();
+            // Refresh the table data
+            await fetchData();
+
+
             setSelectedRows([]);
         } catch (error) {
             console.error('Error deleting data:', error);
         }
     };
-
-
-
 
     return (
         <>
@@ -160,15 +158,15 @@ const PFList = () => {
                                     <div className="header-row" key={index}>
                                         <div className="serial">
                                         <div>
-                                            <input type="checkbox" checked={selectAll} onChange={handleSelectAllToggle} />
+                                            <input type="checkbox" className="selectAll" checked={selectAll} onChange={handleSelectAllToggle} />
                                         </div>
                                         <div>#</div>
                                         </div>
-                                        <div className="header-cell">Part Family Name</div>
-                                        <div className="header-cell">Applicable Shop Types</div>
-                                        <div className="header-cell">Criticality</div>
-                                        <div className="header-cell">Updated By</div>
-                                        <div className="header-cell">Updated On</div>
+                                        <div className="header-cell-pfname">Part Family</div>
+                                        <div className="header-cell-shopType">Applicable Shops</div>
+                                        <div className="header-cell-criticality">Critical To</div>
+                                        <div className="header-cell-updatedBy">Updated By</div>
+                                        <div className="header-cell-updatedOn">Last Updated On</div>
                                     </div>
                                 );
                             }
@@ -184,7 +182,7 @@ const PFList = () => {
                             const criticalities = item.criticality ? item.criticality.join(', ') : '';
                             return (
                                 <div className="table-row" key={index}>
-                                    <div className="table-cell">
+                                    <div className="table-cell-check">
                                         <input
                                             type="checkbox"
                                             checked={selectedRows.includes(item)}
@@ -193,12 +191,12 @@ const PFList = () => {
                                         />
 
                                     </div>
-                                    <div className="table-cell">{index}</div>
-                                    <div className="table-cell">{item.partFamilyName}</div>
-                                    <div className="table-cell">{shopTypes}</div>
-                                    <div className="table-cell">{criticalities}</div>
-                                    <div className="table-cell">{item.updatedBy}</div>
-                                    <div className="table-cell">
+                                    <div className="table-cell-index">{index}</div>
+                                    <div className="table-cell-pfname">{item.partFamilyName}</div>
+                                    <div className="table-cell-shopType">{shopTypes}</div>
+                                    <div className="table-cell-criticality">{criticalities}</div>
+                                    <div className="table-cell-updatedBy">{item.updatedBy}</div>
+                                    <div className="table-cell-updatedOn">
                                         {timeString} {dateObject.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                                     </div>
                                 </div>
@@ -210,10 +208,10 @@ const PFList = () => {
 
             <div className="functionButtons">
                 <button className="customiseButton">CUSTOMISE TABLE</button>
-                <button className="deleteButton" onClick={handleDelete}>DELETE</button>
+                <button className={`deleteButton ${isDeleteDisabled ? 'disabled' : ''}`} onClick={handleDelete} disabled={isDeleteDisabled}>DELETE</button>
                 <div className="edit">
-                    <button className="editButton" onClick={openEditModal}>EDIT</button>
-                    <EditModal showModal={showEditModal} closeModal={closeEditModal} data={editedData} onUpdate={handleEditUpdate}/>
+                    <button className={`editButton ${isEditDisabled ? 'disabled' : ''}`} onClick={openEditModal}>EDIT</button>
+                    <EditModal showModal={showEditModal} closeModal={closeEditModal} disabled={isEditDisabled} data={editedData} onUpdate={handleEditUpdate}/>
                 </div>
 
                 <div className="add">

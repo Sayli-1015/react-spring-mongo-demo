@@ -17,7 +17,7 @@
   .modal-content{
     .editPFTitle{
       margin-top: 20px;
-      margin-left: 20px;
+      margin-left: 19px;
       display: flex;
       justify-content: center;
       .editPFTitleContent{
@@ -29,7 +29,7 @@
         opacity: 1;
       }
       .greenbar{
-        width: 320px;
+        width: 330px;
         height: 11px;
         background: #82C1A7 0% 0% no-repeat padding-box ;
         border-radius: 4px;
@@ -181,7 +181,7 @@
     }
     .editPFButtons{
       display: flex;
-      padding-left: 353px;
+      padding-left: 320px;
       padding-top: 30px;
 
       .editPFCancelButton{
@@ -217,7 +217,7 @@
         text-transform: uppercase;
 
       }
-      .editPFAddButton{
+      .editPFConfirmButton{
         cursor: pointer;
         text-align: center;
         font: normal normal bold 14px/16px Open Sans;
@@ -226,14 +226,14 @@
         text-transform: uppercase;
         opacity: 1;
         border: none;
-        width: 65px;
+        width: 105px;
         height: 35px;
         background: #82C1A7 0% 0% no-repeat padding-box;
         border-radius: 4px;
 
       }
 
-      .editPFAddButton:hover{
+      .editPFConfirmButton:hover{
         cursor: pointer;
         text-align: center;
         font: normal normal bold 14px/16px Open Sans;
@@ -242,7 +242,7 @@
         text-transform: uppercase;
         opacity: 1;
         border: none;
-        width: 65px;
+        width: 105px;
         height: 35px;
         background: #71a992 0% 0% no-repeat padding-box;
         border-radius: 4px;

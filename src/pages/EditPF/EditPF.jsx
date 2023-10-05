@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './EditPF.scss';
 import '../PartFamilyMaster/PFMaster.jsx';
 import axios from "axios";
 
 function EditModal({ showModal, closeModal, data, onUpdate }) {
-    const [inputValue, setInputValue] = useState(data ? data.partFamilyName : '');
-    const [selectedShopType, setSelectedShopType] = useState(data ? data.selectedShopType : '');
-    const [selectedShopTypes, setSelectedShopTypes] = useState(data ? data.applicableShopTypes : []);
-    const [selectedCriticality, setSelectedCriticality] = useState(data ? data.criticality : []);
+    const [inputValue, setInputValue] = useState('');
+    const [selectedShopType, setSelectedShopType] = useState('');
+    const [selectedShopTypes, setSelectedShopTypes] = useState([]);
+    const [selectedCriticality, setSelectedCriticality] = useState([]);
 
+    useEffect(() => {
+        if (data) {
+            setInputValue(data.partFamilyName || '');
+            setSelectedShopType(data.selectedShopType || '');
+            setSelectedShopTypes(data.applicableShopTypes || []);
+            setSelectedCriticality(data.criticality || []);
+        }
+        else {
+            // Clear state when data is null (modal is closed or no data provided)
+            setInputValue('');
+            setSelectedShopType('');
+            setSelectedShopTypes([]);
+            setSelectedCriticality([]);
+        }
+    }, [data]);
     const handleChange = (e) => {
         setInputValue(e.target.value);
     };
@@ -55,9 +70,9 @@ function EditModal({ showModal, closeModal, data, onUpdate }) {
             });
 
             if (response.ok) {
-
-                console.log(updatedData);
-                onUpdate(updatedData);
+                const responseData = await response.json();
+                console.log(responseData);
+                onUpdate(responseData);
                 closeModal();
             } else {
 
@@ -136,24 +151,27 @@ function EditModal({ showModal, closeModal, data, onUpdate }) {
             </div>
             <div className="editPFCriticalitySelector">
                 <div className="editPFCriticalitySelectorSafety">
-                    <input type="checkbox" className="checkBox" value="Safety" onChange={handleCriticalityChange}
+                    <input type="checkbox" className="checkBox" value="Safety" checked={selectedCriticality.includes('Safety')}
+                           onChange={(e) => handleCriticalityChange(e, 'Safety')}
                            />
                     <label>Safety</label>
                 </div>
                 <div className="editPFCriticalitySelectorEmission">
-                    <input type="checkbox" className="checkBox" value="Emission" onChange={handleCriticalityChange}
+                    <input type="checkbox" className="checkBox" value="Emission" checked={selectedCriticality.includes('Emission')}
+                           onChange={(e) => handleCriticalityChange(e, 'Emission')}
                         />
                     <label>Emission</label>
                 </div>
                 <div className="editPFCriticalitySelectorQuality">
-                    <input type="checkbox" className="checkBox" value="Quality" onChange={handleCriticalityChange}/>
+                    <input type="checkbox" className="checkBox" value="Quality" checked={selectedCriticality.includes('Quality')}
+                           onChange={(e) => handleCriticalityChange(e, 'Quality')}/>
 
                     <label>Quality</label>
                 </div>
             </div>
             <div className="editPFButtons">
                 <button className="editPFCancelButton" onClick={closeModal}>Cancel</button>
-                <button className="editPFeditButton" onClick={handleEdit} >edit</button>
+                <button className="editPFConfirmButton" onClick={handleEdit} >Confirm</button>
             </div>
         </div>
     </div>);

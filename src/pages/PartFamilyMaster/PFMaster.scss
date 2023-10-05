@@ -104,37 +104,83 @@ h1{
   overflow: auto;
   background-color: #FFFFFF;
 
-  .header-row{
+  .header-row {
     display: flex;
-
+    padding-bottom: 25px;
+    padding-top: 14px;
+    padding-left: 25px;
+    font: normal normal bold 14px/24px Open Sans;
+    font-weight: bolder;
+    letter-spacing: 0px;
+    color: #707070;
     opacity: 1;
-    .serial{
-      display: flex;
-      flex: 1;
-    }
-    .header-cell{
-      flex: 1;
-      padding: 8px;
-      font-size: 16px;
-      font-weight: bolder;
-      letter-spacing: 0px;
-      color: #707070;
 
+    .serial {
+      display: flex;
+
+      .selectAll {
+        margin-right: 13px;
+      }
+    }
+
+    .header-cell-pfname {
+      padding-left: 2.5rem;
+    }
+
+    .header-cell-shopType {
+      padding-left: 5rem;
+    }
+
+    .header-cell-criticality {
+      padding-left: 9rem;
+    }
+
+    .header-cell-updatedBy {
+      padding-left: 6rem;
+    }
+
+    .header-cell-updatedOn {
+      padding-left: 5rem;
     }
   }
 
   .table-row {
     display: flex;
-
-  }
-
-  .table-cell {
-    flex: 1;
-    padding: 6px;
+    padding-bottom: 18px;
+    padding-left: 25px;
     font: normal normal normal 13px/22px Open Sans;
     letter-spacing: 0px;
     color: #707070;
     opacity: 1;
+    align-items: center;
+
+    .table-cell-index{
+      margin-left: 13px;
+    }
+    .table-cell-pfname {
+      margin-left: 45px;
+      flex-basis: 9.5rem;
+      text-align: left;
+    }
+
+    .table-cell-shopType {
+      flex-basis: 15rem;
+      margin-right: 23px;
+    }
+
+    .table-cell-criticality {
+      flex-basis: 10.5rem;
+    }
+
+    .table-cell-updatedBy {
+      flex-basis: 10rem;
+
+    }
+
+    .table-cell-updatedOn {
+
+    }
+
   }
 }
 
@@ -158,7 +204,11 @@ h1{
     margin-left: 10px;
     width: 5rem;
     @extend %buttonCustomization;
-
+  }
+  .deleteButton.disabled {
+    background-color: #d3d3d3; /* Grey background */
+    color: #808080; /* Grey text */
+    cursor: not-allowed;
   }
   .edit {
     .editButton {
@@ -167,6 +217,12 @@ h1{
       width: 3rem;
       height: 2rem;
       @extend %buttonCustomization;
+    }
+
+    .editButton.disabled {
+      background-color: #d3d3d3; /* Grey background */
+      color: #808080; /* Grey text */
+      cursor: not-allowed;
     }
   }
   .add {
