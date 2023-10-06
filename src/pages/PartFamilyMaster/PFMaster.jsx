@@ -7,6 +7,8 @@ import { Virtuoso } from 'react-virtuoso';
 import SuccessModal from "../SuccessModal/SuccessModal.jsx";
 import EditModal from "../EditPF/EditPF.jsx";
 import axios from "axios";
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal.jsx';
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -19,9 +21,28 @@ const PFList = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const [editedData, setEditedData] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const isEditDisabled = selectedRows.length !== 1;
     const isDeleteDisabled = selectedRows.length === 0;
+    const isAddDisabled = selectedRows.length !== 0;
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+
+        navigate('/');
+    };
+
+    const openDeleteModal = () => {
+        console.log("open");
+        setShowDeleteModal(true);
+
+    };
+
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+    };
 
     const openModal = () => {
         setShowModal(true);
@@ -110,6 +131,7 @@ const PFList = () => {
     };
 
     const handleDelete = async () => {
+        setShowDeleteModal(true);
         try {
             for (const selectedRow of selectedRows) {
                 const rowId = selectedRow.uuid;
@@ -124,12 +146,13 @@ const PFList = () => {
         } catch (error) {
             console.error('Error deleting data:', error);
         }
+        closeDeleteModal();
     };
 
     return (
         <>
             <div className="backTab">
-                <div className="backButton">
+                <div className="backButton" onClick={handleClick}>
                     <img className="backArrow" src={arrow} alt="backarrow"/>
 
                 </div>
@@ -208,14 +231,21 @@ const PFList = () => {
 
             <div className="functionButtons">
                 <button className="customiseButton">CUSTOMISE TABLE</button>
-                <button className={`deleteButton ${isDeleteDisabled ? 'disabled' : ''}`} onClick={handleDelete} disabled={isDeleteDisabled}>DELETE</button>
+                <div className="delete">
+                <button className={`deleteButton ${isDeleteDisabled ? 'disabled' : ''}`} onClick={openDeleteModal} disabled={isDeleteDisabled}>DELETE</button>
+                <DeleteConfirmationModal
+                    showDeleteModal={showDeleteModal}
+                    closeDeleteModal={closeDeleteModal}
+                    onConfirm={handleDelete}
+                />
+                </div>
                 <div className="edit">
                     <button className={`editButton ${isEditDisabled ? 'disabled' : ''}`} onClick={openEditModal}>EDIT</button>
-                    <EditModal showModal={showEditModal} closeModal={closeEditModal} disabled={isEditDisabled} data={editedData} onUpdate={handleEditUpdate}/>
+                    <EditModal showModal={showEditModal} closeModal={closeEditModal}  data={editedData} onUpdate={handleEditUpdate}/>
                 </div>
 
                 <div className="add">
-                    <button className="addButton" onClick={openModal}>ADD PART FAMILY</button>
+                    <button className={`addButton ${isAddDisabled ? 'disabled' : ''}`} onClick={openModal}>ADD PART FAMILY</button>
                     <Modal showModal={showModal} closeModal={closeModal} onAdd={handleAddData} />
 
                 </div>

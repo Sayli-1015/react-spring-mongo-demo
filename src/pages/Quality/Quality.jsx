@@ -1,12 +1,18 @@
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import './Quality.css';
 
-
+import {useNavigate } from 'react-router-dom';
 import tool from '../../assets/Icon metro-tools.png'
 
 import React from "react";
 
 const Quality = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+
+        navigate('/PFMaster');
+    };
 
     return(
         <>
@@ -26,14 +32,14 @@ const Quality = () => {
 
                 <div className="left-card">
                     <p className="card-heading">ACT</p>
-                    <div className="card-buttons">PART FAMILY MASTER</div>
-                    <div className="card-buttons">BARCODE PATTERN MASTER</div>
+                    <button className="card-buttons" onClick={handleClick}>PART FAMILY MASTER</button>
+                    <button className="card-buttons">BARCODE PATTERN MASTER</button>
                 </div>
                 <div className="right-card">
                     <p className="card-heading">TOOLS</p>
-                    <div className="card-buttons">MASTER DATA QUALITY
+                    <button className="card-buttons">MASTER DATA QUALITY
                         <img className="toolImg"  src= {tool} alt="toolimg"/>
-                    </div>
+                    </button>
                 </div>
             </div>
         </>

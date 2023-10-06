@@ -49,6 +49,10 @@ function Modal({showModal, closeModal, onAdd, onSuccess}) {
                 onAdd(response.data);
 
                 closeModal();
+                setInputValue('');
+                setSelectedShopType('');
+                setSelectedShopTypes([]);
+                setSelectedCriticality([]);
             } else {
                 console.error('Request failed with status:', response.status);
 
@@ -134,17 +138,17 @@ function Modal({showModal, closeModal, onAdd, onSuccess}) {
             <div className="addPFCriticalitySelector">
                 <div className="addPFCriticalitySelectorSafety">
                     <input type="checkbox" className="checkBox" value="Safety"
-                           onChange={handleCriticalityChange}/>
+                           onChange={handleCriticalityChange} checked={selectedCriticality.includes('Safety')}/>
                     <label>Safety</label>
                 </div>
                 <div className="addPFCriticalitySelectorEmission">
                     <input type="checkbox" className="checkBox" value="Emission"
-                           onChange={handleCriticalityChange}/>
+                           onChange={handleCriticalityChange} checked={selectedCriticality.includes('Emission')}/>
                     <label>Emission</label>
                 </div>
                 <div className="addPFCriticalitySelectorQuality">
                     <input type="checkbox" className="checkBox" value="Quality"
-                           onChange={handleCriticalityChange}/>
+                           onChange={handleCriticalityChange} checked={selectedCriticality.includes('Quality')}/>
                     <label>Quality</label>
                 </div>
             </div>

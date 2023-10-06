@@ -87,6 +87,14 @@
 
           .card-buttons {
 
+              width: 16rem;
+              text-align: left;
+              font: normal normal bold 14px/19px Open Sans;
+              letter-spacing: 0px;
+              color: #4E4E4E;
+              text-transform: uppercase;
+              opacity: 1;
+              border: none;
               height: 3rem;
               margin-bottom: 15px;
               display: flex;
@@ -101,7 +109,7 @@
 
           .card-buttons:hover{
 
-              background-color: #34b6ee;
+              background-color: #5ccafa;
               color: white;
               cursor: pointer;
           }

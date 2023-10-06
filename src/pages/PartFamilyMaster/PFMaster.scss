@@ -176,11 +176,6 @@ h1{
       flex-basis: 10rem;
 
     }
-
-    .table-cell-updatedOn {
-
-    }
-
   }
 }
 
@@ -199,16 +194,20 @@ h1{
     background: #FFA222 0% 0% no-repeat padding-box;
     @extend %buttonCustomization;
   }
-  .deleteButton{
-    background: #F17C7C 0% 0% no-repeat padding-box;
-    margin-left: 10px;
-    width: 5rem;
-    @extend %buttonCustomization;
-  }
-  .deleteButton.disabled {
-    background-color: #d3d3d3; /* Grey background */
-    color: #808080; /* Grey text */
-    cursor: not-allowed;
+  .delete {
+    .deleteButton {
+      background: #F17C7C 0% 0% no-repeat padding-box;
+      margin-left: 10px;
+      width: 5rem;
+      height: 2rem;
+      @extend %buttonCustomization;
+    }
+
+    .deleteButton.disabled {
+      background-color: #d3d3d3;
+      color: #808080;
+      cursor: not-allowed;
+    }
   }
   .edit {
     .editButton {
@@ -220,8 +219,8 @@ h1{
     }
 
     .editButton.disabled {
-      background-color: #d3d3d3; /* Grey background */
-      color: #808080; /* Grey text */
+      background-color: #d3d3d3;
+      color: #808080;
       cursor: not-allowed;
     }
   }
@@ -233,8 +232,12 @@ h1{
       background: #6AA98F 0% 0% no-repeat padding-box;
       height: 2rem;
       @extend %buttonCustomization;
+    }
 
-
+    .addButton.disabled {
+      background-color: #d3d3d3;
+      color: #808080;
+      cursor: not-allowed;
     }
   }
 }
